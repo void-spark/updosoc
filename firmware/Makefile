@@ -6,7 +6,7 @@ OBJCOPY       := riscv32-unknown-elf-objcopy
 LD            := riscv32-unknown-elf-ld
 
 # Preprocessor flags
-CPPFLAGS      := -DICEBREAKER
+CPPFLAGS      :=
 
 # Generate instructions for the machine type cpu-type.
 ASFLAGS       := -march=rv32ic
