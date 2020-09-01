@@ -2,3 +2,5 @@ upduino_sections.lds
 *.elf
 *.hex
 *.bin
+*.d
+*.o
