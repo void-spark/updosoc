@@ -13,6 +13,7 @@ set_io clk 35 # 12Mhz crystal: Make sure to wire PIN 35 to PIN J6 for this.
 # Normal GPIO pins, right side
 set_io ser_tx 45 # Chip TX: Connect PIN 45 to external uart RX for this
 set_io ser_rx 46 # Chip RX: Connect PIN 46 to external uart TX for this
+set_io reset_button 4 # Chip reset line: Connect PIN 4 to a button for this, high = reset.
 
 # The LED pins are using the current controlled outputs
 # and are negative logic (write a 0 to turn on).

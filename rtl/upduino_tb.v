@@ -23,7 +23,8 @@ module testbench;
 	reg clk;
 	always #5 clk = (clk === 1'b0);
 
-	localparam ser_half_period = 53;
+	// localparam ser_half_period = 53; // half + 1?
+	localparam ser_half_period = 25;
 	event ser_sample;
 
 	initial begin
@@ -43,10 +44,12 @@ module testbench;
 		cycle_cnt <= cycle_cnt + 1;
 	end
 
-	wire led1, led2, led3, led4, led5;
-	wire ledr_n, ledg_n;
+	wire reset_button = 1'b0;
 
-	wire [6:0] leds = {!ledg_n, !ledr_n, led5, led4, led3, led2, led1};
+	wire led_r, led_g, led_b;
+
+    // Since the ICE40 pwm led drivers are black box, connect to the internal signals instead.
+	wire [2:0] leds = {uut.pwm_r, uut.pwm_g, uut.pwm_b};
 
 	wire ser_rx;
 	wire ser_tx;
@@ -55,11 +58,11 @@ module testbench;
 	wire flash_clk;
 	wire flash_io0;
 	wire flash_io1;
-	wire flash_io2;
-	wire flash_io3;
+	wire flash_io2 = 1'b0;
+	wire flash_io3 = 1'b0;
 
 	always @(leds) begin
-		#1 $display("%b", leds);
+		#1 $display("LED(rgb): %b", leds);
 	end
 
 	upduino #(
@@ -69,21 +72,18 @@ module testbench;
 		.MEM_WORDS(256)
 	) uut (
 		.clk      (clk      ),
-		.led1     (led1     ),
-		.led2     (led2     ),
-		.led3     (led3     ),
-		.led4     (led4     ),
-		.led5     (led5     ),
-		.ledr_n   (ledr_n   ),
-		.ledg_n   (ledg_n   ),
-		.ser_rx   (ser_rx   ),
+		.reset_button(reset_button),
 		.ser_tx   (ser_tx   ),
+		.ser_rx   (ser_rx   ),
+		.led_r    (led_r    ),
+		.led_g    (led_g    ),
+		.led_b    (led_b    ),
 		.flash_csb(flash_csb),
 		.flash_clk(flash_clk),
 		.flash_io0(flash_io0),
-		.flash_io1(flash_io1),
-		.flash_io2(flash_io2),
-		.flash_io3(flash_io3)
+		.flash_io1(flash_io1)
+		// .flash_io2(flash_io2),
+		// .flash_io3(flash_io3)
 	);
 
 	spiflash spiflash (

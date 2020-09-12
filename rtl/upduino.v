@@ -26,6 +26,8 @@
 module upduino (
 	input clk,
 
+    input reset_button,
+
 	output ser_tx,
 	input ser_rx,
 
@@ -41,10 +43,11 @@ module upduino (
 	parameter integer MEM_WORDS = 32768;
 
 	reg [5:0] reset_cnt = 0;
-	wire resetn = &reset_cnt;
+	wire reset_ready = &reset_cnt;
+	wire resetn = reset_ready && !reset_button;
 
 	always @(posedge clk) begin
-		reset_cnt <= reset_cnt + !resetn;
+		reset_cnt <= reset_cnt + !reset_ready;
 	end
 
 	wire pwm_r;
