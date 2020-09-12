@@ -53,9 +53,10 @@ module testbench;
 	);
 
 	localparam [23:0] offset = 24'h100000;
-	localparam [31:0] word0 = 32'h 00000093;
-	localparam [31:0] word1 = 32'h 00000193;
-
+	// Match to upduino_fw.hx, bytes in reverse order
+	localparam [31:0] word0 = 32'h 41814081;
+	localparam [31:0] word1 = 32'h 42814201;
+  
 	reg [7:0] rdata;
 	integer errcount = 0;
 
