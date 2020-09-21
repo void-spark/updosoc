@@ -49,6 +49,16 @@ spiflash_tb: rtl/spiflash_tb.vvp firmware/upduino_fw.hex
 rtl/spiflash_tb.vvp:
 	$(MAKE) -C rtl spiflash_tb.vvp
 
+# ---- Testbench for UART ----
+
+.PHONY: simpleuart_tb
+simpleuart_tb: rtl/simpleuart_tb.vvp
+	vvp -N $<
+
+.PHONY: rtl/simpleuart_tb.vvp
+rtl/simpleuart_tb.vvp:
+	$(MAKE) -C rtl simpleuart_tb.vvp
+
 # ---- Clean ----
 
 .PHONY: clean

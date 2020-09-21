@@ -27,6 +27,10 @@ upduino_syn.v: upduino.json
 spiflash_tb.vvp: spiflash_tb.v spiflash.v 
 	iverilog -s testbench -o $@ $^
 
+# Generate Icarus Verilog vvp assembly from the uart testbench
+simpleuart_tb.vvp: simpleuart_tb.v simpleuart.v
+	iverilog -s testbench -o $@ $^
+
 .PHONY: clean
 clean:
 	rm -f *.vvp *.asc *.bin *.json *.log *.rpt *syn.v
