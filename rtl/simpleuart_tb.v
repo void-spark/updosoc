@@ -156,10 +156,78 @@ module testbench;
         // No longer provide value
         uart_reg_dat_di = 32'h0000_0000;
 
-        // Wait 2  clocks
+        // Wait 2 clocks
         #20;
 
-        $display("Done");
+        $display("Tx test done");
+
+
+        // Initially, no byte should be available, reported as '-1', or all 1's
+        if (uart_reg_dat_do !== 32'hffff_ffff) begin
+            $display("ERROR: Got %x but expected %x.", uart_reg_dat_do, 32'h0000_0013);
+        end
+
+        // One bit is 48(+2) clocks (50), 500 ticks.
+        // Write each bit, value: 0-11001000-1
+        // Start bit
+        uart_ser_rx = 1'b0;
+        #500;
+        // Bit 0
+        uart_ser_rx = 1'b1;
+        #500;
+        // Bit 1
+        uart_ser_rx = 1'b1;
+        #500;
+        // Bit 2
+        uart_ser_rx = 1'b0;
+        #500;
+        // Bit 3
+        uart_ser_rx = 1'b0;
+        #500;
+        // Bit 4
+        uart_ser_rx = 1'b1;
+        #500;
+        // Bit 5
+        uart_ser_rx = 1'b0;
+        #500;
+        // Bit 6
+        uart_ser_rx = 1'b0;
+        #500;
+        // Bit 7
+        uart_ser_rx = 1'b0;
+        #500;
+        // Stop bit
+        uart_ser_rx = 1'b1;
+        #500;
+
+        if (uart_reg_dat_wait !== 1'b0) begin
+            $display("ERROR: Expected uart_reg_dat_wait to be low");
+        end
+
+        // Set read enable serial value.
+        uart_reg_dat_re = 1'b1;
+
+        // Read on the same clock(!)
+        if (uart_reg_dat_do !== 32'h0000_0013) begin
+            $display("ERROR: Got %x but expected %x.", uart_reg_dat_do, 32'h0000_0013);
+        end
+
+        // Wait 1 clocks
+        #10;
+
+        // After one clock the value is already reset
+        if (uart_reg_dat_do !== 32'hffff_ffff) begin
+            $display("ERROR: Got %x but expected %x.", uart_reg_dat_do, 32'h0000_0013);
+        end
+
+        // Set read disable serial value.
+        uart_reg_dat_re = 1'b0;
+
+        // Wait 2 clocks
+        #20;
+
+        $display("Rx test done");
+
         $finish;
 	end
 
