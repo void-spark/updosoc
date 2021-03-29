@@ -1,0 +1,53 @@
+[*]
+[*] GTKWave Analyzer v3.3.100 (w)1999-2019 BSI
+[*] Mon Mar 29 20:41:41 2021
+[*]
+[dumpfile] "testbench.vcd"
+[dumpfile_mtime] "Mon Mar 29 20:21:53 2021"
+[dumpfile_size] 89123188
+[savefile] "testbench.gtkw"
+[timestart] 0
+[size] 1717 954
+[pos] 24 40
+*-16.000000 246700 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] testbench.uut.
+[sst_width] 197
+[signals_width] 169
+[sst_expanded] 1
+[sst_vpaned_height] 277
+@200
+-CLOCK:
+@28
+testbench.clk
+@420
+testbench.cycle_cnt
+@200
+-
+-UART:
+@28
+testbench.ser_rx
+testbench.ser_tx
+testbench.ser_sample
+@200
+-
+-LEDS:
+@800028
+testbench.leds[2:0]
+@28
+(0)testbench.leds[2:0]
+(1)testbench.leds[2:0]
+(2)testbench.leds[2:0]
+@1001200
+-group_end
+@200
+-
+-FLASH:
+@28
+testbench.flash_clk
+testbench.flash_csb
+testbench.flash_io0
+testbench.flash_io1
+testbench.flash_io2
+testbench.flash_io3
+[pattern_trace] 1
+[pattern_trace] 0
