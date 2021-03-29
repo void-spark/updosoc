@@ -1,0 +1,63 @@
+[*]
+[*] GTKWave Analyzer v3.3.100 (w)1999-2019 BSI
+[*] Mon Sep 21 21:14:49 2020
+[*]
+[dumpfile] "simpleuart_tb.vcd"
+[dumpfile_mtime] "Mon Sep 21 21:01:23 2020"
+[dumpfile_size] 51626
+[savefile] "simpleuart_tb.gtkw"
+[timestart] 12698400
+[size] 1440 837
+[pos] -1 -1
+*-16.000000 8275000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] testbench.
+[sst_width] 42
+[signals_width] 277
+[sst_expanded] 0
+[sst_vpaned_height] 236
+@28
+testbench.uart_clk
+@22
+testbench.uart_reg_dat_di[31:0]
+testbench.uart_reg_dat_do[31:0]
+@28
+testbench.uart_reg_dat_re
+testbench.uart_reg_dat_wait
+testbench.uart_reg_dat_we
+@22
+testbench.uart_reg_div_di[31:0]
+testbench.uart_reg_div_do[31:0]
+testbench.uart_reg_div_we[3:0]
+@28
+testbench.uart_resetn
+@200
+-
+-Serial lines(ext):
+@28
+testbench.uart_ser_rx
+testbench.uart_ser_tx
+@200
+-
+-Send(int):
+@28
+testbench.uut.send_init
+@22
+testbench.uut.cfg_divider[31:0]
+@29
+testbench.uut.send_pattern[9:0]
+@22
+testbench.uut.send_bitcnt[3:0]
+testbench.uut.send_divcnt[31:0]
+@200
+-
+-Receive(int):
+@22
+testbench.uut.recv_buf_data[7:0]
+@28
+testbench.uut.recv_buf_valid
+@22
+testbench.uut.recv_divcnt[31:0]
+testbench.uut.recv_pattern[7:0]
+testbench.uut.recv_state[3:0]
+[pattern_trace] 1
+[pattern_trace] 0
