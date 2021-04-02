@@ -9,7 +9,11 @@ upduino.asc: upduino.pcf upduino.json
 
 # Synthesize the SoC to a json design file
 upduino.json: upduino.v ice40up5k_spram.v spimemio.v simpleuart.v picosoc.v picorv32.v
-	yosys -ql upduino.log -p 'synth_ice40 -top upduino -json upduino.json' $^
+	yosys -ql $(basename $@).log -p 'synth_ice40 -top upduino -json $@' $^
+
+# Synthesize the SoC to a json design file, but limit memory size
+upduino_memlimit.json: upduino.v ice40up5k_spram.v spimemio.v simpleuart.v picosoc.v picorv32.v
+	yosys -ql $(basename $@).log -p 'chparam -set MEM_WORDS 256 upduino; synth_ice40 -top upduino -json $@' $^
 
 # Generate Icarus Verilog vvp assembly from the SoC testbench.
 upduino_tb.vvp: upduino_tb.v upduino.v ice40up5k_spram.v spimemio.v simpleuart.v picosoc.v picorv32.v spiflash.v
@@ -20,8 +24,8 @@ upduino_syn_tb.vvp: upduino_tb.v upduino_syn.v spiflash.v
 	iverilog -s testbench -o $@ $^ `yosys-config --datdir/ice40/cells_sim.v`
 
 # Generate verilog from the systhesized SoC.
-upduino_syn.v: upduino.json
-	yosys -p 'read_json upduino.json; write_verilog upduino_syn.v'
+upduino_syn.v: upduino_memlimit.json
+	yosys -p 'read_json $<; write_verilog $@'
 
 # Generate Icarus Verilog vvp assembly from the SPI testbench
 spiflash_tb.vvp: spiflash_tb.v spiflash.v 
